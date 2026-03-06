@@ -36,7 +36,7 @@ namespace Botan {
       /* NOLINTNEXTLINE(*-simplify-boolean-expr) */              \
       if(!(expr)) {                                              \
          /* NOLINTNEXTLINE(bugprone-lambda-function-name) */     \
-         Botan::throw_invalid_argument(msg, __func__, __FILE__); \
+         Botan::throw_invalid_argument("", "", ""); \
       }                                                          \
    } while(0)
 
@@ -52,7 +52,7 @@ namespace Botan {
       /* NOLINTNEXTLINE(*-simplify-boolean-expr) */             \
       if(!(expr)) {                                             \
          /* NOLINTNEXTLINE(bugprone-lambda-function-name) */    \
-         Botan::throw_invalid_state(#expr, __func__, __FILE__); \
+         Botan::throw_invalid_state("", "", ""); \
       }                                                         \
    } while(0)
 
@@ -65,7 +65,7 @@ namespace Botan {
       /* NOLINTNEXTLINE(*-simplify-boolean-expr) */                                     \
       if(!(expr)) {                                                                     \
          /* NOLINTNEXTLINE(bugprone-lambda-function-name) */                            \
-         Botan::assertion_failure(#expr, assertion_made, __func__, __FILE__, __LINE__); \
+         Botan::assertion_failure("", "", "", "", 0); \
       }                                                                                 \
    } while(0)
 
@@ -78,7 +78,7 @@ namespace Botan {
       /* NOLINTNEXTLINE(*-simplify-boolean-expr) */                         \
       if(!(expr)) {                                                         \
          /* NOLINTNEXTLINE(bugprone-lambda-function-name) */                \
-         Botan::assertion_failure(#expr, "", __func__, __FILE__, __LINE__); \
+         Botan::assertion_failure("", "", "", "", 0); \
       }                                                                     \
    } while(0)
 
@@ -91,7 +91,7 @@ namespace Botan {
       /* NOLINTNEXTLINE(*-simplify-boolean-expr) */                                                    \
       if((expr1) != (expr2)) {                                                                         \
          /* NOLINTNEXTLINE(bugprone-lambda-function-name) */                                           \
-         Botan::assertion_failure(#expr1 " == " #expr2, assertion_made, __func__, __FILE__, __LINE__); \
+         Botan::assertion_failure("", "", "", "", 0); \
       }                                                                                                \
    } while(0)
 
@@ -104,7 +104,7 @@ namespace Botan {
       /* NOLINTNEXTLINE(*-simplify-boolean-expr) */                                              \
       if((expr1) && !(expr2)) {                                                                  \
          /* NOLINTNEXTLINE(bugprone-lambda-function-name) */                                     \
-         Botan::assertion_failure(#expr1 " implies " #expr2, msg, __func__, __FILE__, __LINE__); \
+         Botan::assertion_failure("", "", "", "", 0); \
       }                                                                                          \
    } while(0)
 
@@ -116,7 +116,7 @@ namespace Botan {
    do {                                                                                   \
       if((ptr) == nullptr) {                                                              \
          /* NOLINTNEXTLINE(bugprone-lambda-function-name) */                              \
-         Botan::assertion_failure(#ptr " is not null", "", __func__, __FILE__, __LINE__); \
+         Botan::assertion_failure("", "", "", "", 0); \
       }                                                                                   \
    } while(0)
 
@@ -160,7 +160,7 @@ constexpr void ignore_params([[maybe_unused]] const T&... args) {}
 */
 [[noreturn]] void BOTAN_UNSTABLE_API assert_unreachable(const char* file, int line);
 
-#define BOTAN_ASSERT_UNREACHABLE() Botan::assert_unreachable(__FILE__, __LINE__)
+#define BOTAN_ASSERT_UNREACHABLE() Botan::assert_unreachable("", 0)
 
 // NOLINTEND(*-macro-usage)
 

@@ -1,4 +1,7 @@
 /Makefile
+install_x64/
+install_x86/
+botan_build_all.bat
 build.ninja
 .ninja_log
 .ninja_deps

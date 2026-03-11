@@ -10,7 +10,10 @@ set PYTHONUTF8=1
 :: ============================================================
 :: 配置区
 :: ============================================================
-set "VCVARSALL=D:\VS2022BuildToools\VC\Auxiliary\Build\vcvarsall.bat"
+set "VCVARSALL=D:\VS2022BuildTools\VC\Auxiliary\Build\vcvarsall.bat"
+if not exist "%VCVARSALL%" (
+    set "VCVARSALL=D:\VisualStudio2022BuildTools\VC\Auxiliary\Build\vcvarsall.bat"
+)
 
 :: 检查 vcvarsall.bat 是否存在
 if not exist "%VCVARSALL%" (
@@ -78,6 +81,9 @@ if errorlevel 1 exit /b 1
 :: 进入脚本所在目录
 cd /d "%~dp0"
 
+:: 删除 build 文件夹
+rmdir /s /q "%~dp0build"
+
 echo [x86] 运行 configure...
 py configure.py --cpu x86_32 --build-tool ninja --enable-static-library --disable-shared-library --msvc-runtime=MT ^
  --prefix "%~dp0install_x86"
@@ -90,6 +96,10 @@ if errorlevel 1 exit /b 1
 echo [x86] 运行 ninja install...
 ninja install
 if errorlevel 1 exit /b 1
+
+if exist "%~dp0build\include\internal" (
+    xcopy /E /I /Y "%~dp0build\include\internal" "%~dp0install_x86\include\botan-3" >nul
+)
 
 echo [x86] 完成！
 endlocal
@@ -108,6 +118,9 @@ if errorlevel 1 exit /b 1
 
 cd /d "%~dp0"
 
+:: 删除 build 文件夹
+rmdir /s /q "%~dp0build"
+
 echo [x64] 运行 configure...
 py configure.py --cpu x86_64 --build-tool ninja --enable-static-library --disable-shared-library --msvc-runtime=MT ^
  --prefix "%~dp0install_x64"
@@ -120,6 +133,10 @@ if errorlevel 1 exit /b 1
 echo [x64] 运行 ninja install...
 ninja install
 if errorlevel 1 exit /b 1
+
+if exist "%~dp0build\include\internal" (
+    xcopy /E /I /Y "%~dp0build\include\internal" "%~dp0install_x64\include\botan-3" >nul
+)
 
 echo [x64] 完成！
 endlocal

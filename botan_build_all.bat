@@ -86,7 +86,7 @@ rmdir /s /q "%~dp0build"
 
 echo [x86] 运行 configure...
 py configure.py --cpu x86_32 --build-tool ninja --enable-static-library --disable-shared-library --msvc-runtime=MT ^
- --prefix "%~dp0install_x86"
+ --prefix "%~dp0install_x86" --extra-cxxflags "/GL"
 if errorlevel 1 exit /b 1
 
 echo [x86] 运行 ninja...
@@ -123,7 +123,7 @@ rmdir /s /q "%~dp0build"
 
 echo [x64] 运行 configure...
 py configure.py --cpu x86_64 --build-tool ninja --enable-static-library --disable-shared-library --msvc-runtime=MT ^
- --prefix "%~dp0install_x64"
+ --prefix "%~dp0install_x64" --extra-cxxflags "/GL"
 if errorlevel 1 exit /b 1
 
 echo [x64] 运行 ninja...

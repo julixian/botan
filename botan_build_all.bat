@@ -10,10 +10,7 @@ set PYTHONUTF8=1
 :: ============================================================
 :: 配置区
 :: ============================================================
-set "VCVARSALL=D:\VS2022BuildTools\VC\Auxiliary\Build\vcvarsall.bat"
-if not exist "%VCVARSALL%" (
-    set "VCVARSALL=D:\VisualStudio2022BuildTools\VC\Auxiliary\Build\vcvarsall.bat"
-)
+set "VCVARSALL=D:\VisualStudio2022BuildTools\VC\Auxiliary\Build\vcvarsall.bat"
 
 :: 检查 vcvarsall.bat 是否存在
 if not exist "%VCVARSALL%" (
